@@ -1,6 +1,7 @@
 package foro_hub.api_foro.domain.usuarios;
 
 
+import foro_hub.api_foro.domain.respuesta.Respuesta;
 import foro_hub.api_foro.domain.topico.Topico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

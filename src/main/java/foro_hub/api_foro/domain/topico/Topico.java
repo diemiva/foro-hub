@@ -1,6 +1,7 @@
 package foro_hub.api_foro.domain.topico;
 
 import foro_hub.api_foro.domain.curso.Curso;
+import foro_hub.api_foro.domain.respuesta.Respuesta;
 import foro_hub.api_foro.domain.usuarios.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Topico")
 @Table(name = "topicos")
