@@ -1,6 +1,9 @@
 package foro_hub.api_foro.domain.topico;
 
 
+import foro_hub.api_foro.domain.ValidacionException;
+import foro_hub.api_foro.domain.curso.Curso;
+import foro_hub.api_foro.domain.curso.CursoRepository;
 import foro_hub.api_foro.domain.usuarios.Usuario;
 import foro_hub.api_foro.domain.usuarios.UsuarioRepository;
 import jakarta.validation.Valid;
