@@ -1,6 +1,8 @@
 package foro_hub.api_foro.domain.topico;
 
 
+import foro_hub.api_foro.domain.usuarios.Usuario;
+import foro_hub.api_foro.domain.usuarios.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
