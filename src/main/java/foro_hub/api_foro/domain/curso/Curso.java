@@ -12,7 +12,6 @@ import java.util.List;
 @Entity(name = "Curso")
 @Table(name = "cursos")
 @Getter
-@Setter
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Curso {
@@ -46,5 +45,17 @@ public class Curso {
     public void setTopicos(List<Topico> topicos) {
         topicos.forEach(t -> t.setCurso(this));
         this.topicos = topicos;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }
