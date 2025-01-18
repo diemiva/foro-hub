@@ -1,9 +1,12 @@
 package foro_hub.api_foro.domain.usuarios;
 
 
+import foro_hub.api_foro.domain.topico.Topico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 @Entity(name="Usuario")
 @Table(name="usuarios")
