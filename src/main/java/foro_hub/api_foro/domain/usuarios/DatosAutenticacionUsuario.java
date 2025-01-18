@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 public record DatosAutenticacionUsuario(
         @NotBlank
         @Email
-        String correoElectronico,
+        String email,
         @NotBlank
         String clave
 ) {
