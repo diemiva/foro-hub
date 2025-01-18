@@ -28,12 +28,9 @@ public class TopicoService {
     public RegistroTopicoResponse registrarTopico(@Valid RegistroTopicoRequest datos, Usuario usuarioAutenticado) {
 
         Curso curso = cursoRepository.findByNombreEquals(datos.nombreCurso());
-        if (curso == null) {
-            throw new ValidacionException("El curso no existe");
-        }
         Topico nuevoTopico = topicoRepository.existeTopicoEnElCurso(datos.titulo(), datos.mensaje(), datos.nombreCurso());
         if (nuevoTopico != null) {
-            throw new ValidacionException("Ya existe un tópico similar en el foro");
+            throw new ValidacionException("Ya existe un tópico en el foro");
         }
 
         nuevoTopico = new Topico(datos, usuarioAutenticado, curso);

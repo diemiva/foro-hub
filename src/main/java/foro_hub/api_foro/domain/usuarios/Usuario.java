@@ -57,6 +57,18 @@ public class Usuario implements UserDetails {
         return respuestas;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
     public void setTopicosCreados(List<Topico> topicosCreados) {
         topicosCreados.forEach(t -> t.setAutor(this));
         this.topicosCreados = topicosCreados;
