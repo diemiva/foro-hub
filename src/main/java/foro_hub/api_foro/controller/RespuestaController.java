@@ -30,6 +30,26 @@ public class RespuestaController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DatosRespuestaResponse> obtenerRespuestaPorId(@PathVariable Long id) {
+        DatosRespuestaResponse respuesta = respuestaService.obtenerRespuestaPorId(id);
+        return ResponseEntity.ok(respuesta);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<RegistroRespuestaResponse> modificarRespuesta(@PathVariable Long id, @RequestBody @Valid RegistroRespuestaRequest respuesta) {
+        Usuario usuarioAutenticado = autenticacionUsuarioService.obtenerUsuarioAutenticado();
+        RegistroRespuestaResponse response = respuestaService.modificarRespuesta(id, respuesta, usuarioAutenticado);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarRespuesta(@PathVariable Long id) {
+        Usuario usuarioAutenticado = autenticacionUsuarioService.obtenerUsuarioAutenticado();
+        respuestaService.eliminarRespuesta(id, usuarioAutenticado);
+        return ResponseEntity.noContent().build();
+    }
+
     // Trae todas las respuestas generadas por el usuario autenticado
     @GetMapping
     public ResponseEntity<List<DatosRespuestaResponse>> obtenerTodasLasRespuestas() {

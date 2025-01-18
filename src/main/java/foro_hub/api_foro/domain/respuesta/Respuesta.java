@@ -12,8 +12,6 @@ import java.time.LocalDateTime;
 
 @Entity(name = "Respuesta")
 @Table(name = "respuestas")
-@Getter
-@Setter
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Respuesta {
@@ -32,8 +30,6 @@ public class Respuesta {
 
     public Respuesta() {
     }
-
-    ;
 
     public Respuesta(RegistroRespuestaRequest registro, Topico topico, Usuario usuario) {
         this.mensaje = registro.mensaje();
@@ -65,5 +61,9 @@ public class Respuesta {
 
     public Boolean getSolucion() {
         return solucion;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 }

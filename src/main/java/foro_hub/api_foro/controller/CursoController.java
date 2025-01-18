@@ -25,4 +25,15 @@ public class CursoController {
         List<DatosCursoResponse> cursos = cursoService.listarCursos();
         return ResponseEntity.ok(cursos);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<RegistroCursoResponse> modificarCurso(@PathVariable Long id, @RequestBody @Valid ModificacionCursoRequest modificacionCursoRequest) {
+        RegistroCursoResponse response = cursoService.modificarCurso(id, modificacionCursoRequest);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarCurso(@PathVariable Long id) {
+        cursoService.eliminarCurso(id);
+        return ResponseEntity.noContent().build();
+    }
 }

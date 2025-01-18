@@ -35,4 +35,23 @@ public class CursoService {
                 .collect(Collectors.toList());
     }
 
+    public RegistroCursoResponse modificarCurso(Long id, ModificacionCursoRequest modificacionCursoRequest) {
+        Curso cursoExistente = cursoRepository.findById(id)
+                .orElseThrow(() -> new ValidacionException("Curso no encontrado"));
+
+        cursoExistente.setNombre(modificacionCursoRequest.nombre());
+        cursoExistente.setCategoria(modificacionCursoRequest.categoria());
+
+        cursoRepository.save(cursoExistente);
+
+        return new RegistroCursoResponse(cursoExistente);
+    }
+
+    public void eliminarCurso(Long id) {
+        if (!cursoRepository.existsById(id)) {
+            throw new ValidacionException("Curso no encontrado");
+        }
+        cursoRepository.deleteById(id);
+    }
+
 }

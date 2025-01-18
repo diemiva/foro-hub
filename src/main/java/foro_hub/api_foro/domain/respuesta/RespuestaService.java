@@ -22,7 +22,6 @@ public class RespuestaService {
     RespuestaRepository respuestaRepository;
 
     public RegistroRespuestaResponse crearRespuesta(Long topicoId, @Valid RegistroRespuestaRequest respuesta, Usuario usuarioAutenticado) {
-
         Optional<Topico> topicoBuscado = topicoRepository.findById(topicoId);
         if (topicoBuscado.isEmpty()) {
             throw new ValidacionException("No existe el tópico al que hace referencia");
@@ -43,4 +42,36 @@ public class RespuestaService {
                 .map(r -> new DatosRespuestaResponse(r.getTopico().getTitulo(), r.getAutor().getNombre(), r.getMensaje()))
                 .collect(Collectors.toList());
     }
+
+    public RegistroRespuestaResponse modificarRespuesta(Long id, @Valid RegistroRespuestaRequest respuesta, Usuario usuarioAutenticado) {
+        Respuesta respuestaExistente = respuestaRepository.findById(id)
+                .orElseThrow(() -> new ValidacionException("Respuesta no encontrada"));
+
+        // Verificar si el usuario autenticado es el autor de la respuesta
+        if (!respuestaExistente.getAutor().getId().equals(usuarioAutenticado.getId())) {
+            throw new ValidacionException("No tiene permisos para modificar esta respuesta.");
+        }
+
+        respuestaExistente.setMensaje(respuesta.mensaje());
+        respuestaRepository.save(respuestaExistente);
+        return new RegistroRespuestaResponse(respuestaExistente);
+    }
+
+    public void eliminarRespuesta(Long id, Usuario usuarioAutenticado) {
+        Respuesta respuestaExistente = respuestaRepository.findById(id)
+                .orElseThrow(() -> new ValidacionException("Respuesta no encontrada"));
+
+        // Verificar si el usuario autenticado es el autor de la respuesta
+        if (!respuestaExistente.getAutor().getId().equals(usuarioAutenticado.getId())) {
+            throw new ValidacionException("No tiene permisos para eliminar esta respuesta.");
+        }
+
+        respuestaRepository.deleteById(id);
+    }
+    public DatosRespuestaResponse obtenerRespuestaPorId(Long id) {
+        Respuesta respuesta = respuestaRepository.findById(id)
+                .orElseThrow(() -> new ValidacionException("Respuesta no encontrada"));
+        return new DatosRespuestaResponse(respuesta);
+    }
+
 }
