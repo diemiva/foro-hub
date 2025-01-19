@@ -102,4 +102,7 @@ public class Topico {
         this.curso = curso;
     }
 
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
 }

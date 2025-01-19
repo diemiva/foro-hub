@@ -27,12 +27,20 @@ public class RespuestaService {
             throw new ValidacionException("No existe el tópico al que hace referencia");
         }
 
+        // Verificar si el tópico está cerrado
         if (topicoBuscado.get().getEstado().equals(Estado.CERRADO)) {
-            throw new ValidacionException("No es posible generar una respuesta para este topico. El tópico está cerrado.");
+            throw new ValidacionException("No es posible generar una respuesta para este tópico. El tópico está cerrado.");
         }
 
+        // Crear y guardar la nueva respuesta
         Respuesta nuevaRespuesta = new Respuesta(respuesta, topicoBuscado.get(), usuarioAutenticado);
         respuestaRepository.save(nuevaRespuesta);
+
+        // Cambiar el estado del tópico a cerrado
+        Topico topico = topicoBuscado.get();
+        topico.setEstado(Estado.CERRADO);
+        topicoRepository.save(topico); // Guardar el tópico actualizado
+
         return new RegistroRespuestaResponse(nuevaRespuesta);
     }
 
